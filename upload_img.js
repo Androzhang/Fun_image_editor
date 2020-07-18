@@ -20,17 +20,38 @@ function makeGray() {
     }
     var imgcanvas = document.getElementById("c2");
     image.drawTo(imgcanvas);
-    addbtGray();
+    addbtdownload();
 }
 //Make the image red
-//function makeRed() {}
+function makeRed() {
+    for (var pixel of image.values()) {
+        var avg = (pixel.getRed()+pixel.getGreen()+pixel.getBlue())/3;
+        if (avg<128){
+            pixel.setRed(2*avg);
+            pixel.setGreen(0);
+            pixel.setBlue(0);
+        } else {
+            pixel.setRed(255);
+            pixel.setGreen((2*avg)-255);
+            pixel.setBlue((2*avg)-255); 
+        }
+    }
+    var imgcanvas = document.getElementById("c2");
+    image.drawTo(imgcanvas);
+    addbtdownload();
+}
 //Make the image blue
 //function makeBlue() {}
 
 //add download button
-function addbtGray() {
+function addbtdownload() {
     var dlGray = document.getElementById("downloadGrayImage");
-    dlGray.innerHTML = '<button><a href="#" id="dlGrayBt" download="grayimage.jpg" onclick="downloadGrayImg(this)">Download gray image</a></button>';
+    dlGray.innerHTML = '<button><a href="#" id="dlGrayBt" download="grayimage.jpg" onclick="downloadGrayImg(this)">Download image</a></button>';
+}
+//remove download button
+function rmvbtdownload() {
+    var dlGray = document.getElementById("downloadGrayImage");
+    dlGray.innerHTML = '';
 }
 //download your image
 function downloadGrayImg() {
@@ -44,6 +65,7 @@ function clearC() {
     ctx.clearRect(0,0,image.getWidth(),image.getHeight());
     var ctx2 = document.getElementById("c2").getContext("2d");
     ctx2.clearRect(0,0,image.getWidth(),image.getHeight());
+    rmvbtdownload();
 }
 
 //FUNCTION 2 [Replace black screen]
@@ -73,8 +95,11 @@ function createCmp() {
     if (bgimg == null || !bgimg.complete()) {
         alert("Background image not loaded!");
         return;
-    } 
-    clearCvs();
+    }
+    if (fgimg.getWidth() > bgimg.getWidth()) {
+        alert("Foreground image must have smaller size than background image! Please try again.");
+        clearCvs()
+    }
     var output = new SimpleImage(fgimg.getWidth(),fgimg.getHeight());
     for(var pixel of fgimg.values()) {
         var x = pixel.getX();
@@ -88,19 +113,29 @@ function createCmp() {
     }
     var fgcanvas = document.getElementById("fgcan");
     output.drawTo(fgcanvas);
-    rmcvs();
+    hidecvs();
     addbt();
     //setTimeout(alert("Process complete!"), 6000); 
 }
-//remove extra canvas
-function rmcvs() {
+//hide extra canvas
+function hidecvs() {
     var extracvs = document.getElementById("bgcan");
-    extracvs.remove()
+    extracvs.style.display = "none";
+}
+//reset canvas
+function showcvs() {
+    var extracvs = document.getElementById("bgcan");
+    extracvs.style.display = "block";
 }    
 //add download button
 function addbt() {
     var dlbt = document.getElementById("dlbt");
     dlbt.innerHTML = '<button><a href="#" id="btn-download" download="myimage.jpg" onclick="downloadImg(this)">Download your image</a></button>';
+}
+//remove download button
+function rmvbt() {
+    var dlbt = document.getElementById("dlbt");
+    dlbt.innerHTML = '';
 }
 //download your image
 function downloadImg() {
@@ -115,5 +150,7 @@ function clearCvs() {
     ctx.clearRect(0,0,fgimg.getWidth(),fgimg.getHeight());
     var ctx2 = document.getElementById("bgcan").getContext("2d");
     ctx2.clearRect(0,0,bgimg.getWidth(),bgimg.getHeight());
+    rmvbt();
+    showcvs();
 }
 
