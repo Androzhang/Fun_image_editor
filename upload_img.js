@@ -8,7 +8,6 @@ function upload() {
     image = new SimpleImage(fileinput);
     var canvas = document.getElementById("c");
     image.drawTo(canvas);
-
 }
 //Make the image gray
 function makeGray() {
@@ -42,7 +41,6 @@ function makeRed() {
 }
 //Make the image blue
 //function makeBlue() {}
-
 //add download button
 function addbtdownload() {
     var dlGray = document.getElementById("downloadGrayImage");
