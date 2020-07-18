@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fun Image Editor</title>
+    <link href="upload_img.css" rel="stylesheet">
+</head>
+
+<body>
+    <header id="f1">Image filter.</header>
+    <p>Please upload your picture.</p>
+    <canvas id="c"></canvas>
+    <canvas id="c2"></canvas>
+    <div id="downloadGrayImage"></div>
+    <p class="tl">Upload your image</p>
+    <p>
+        Filename:
+        <input type="file" multiple="false" accept="image/*" id="pic" onchange="upload()">
+    </p>
+    <p class="tl">Choose filter</p>
+    <input type="button" value="Grayscale" onclick="makeGray()">
+    <!-- <input type="button" value="Red" onclick="makeRed()">
+    <input type="button" value="Blue" onclick="makeBlue()"> -->
+    <p class="tl">Reset image</p>
+    <input type="button" value="Clear Canvas" onclick="clearC()">
+
+    <br>
+    <p></p>
+    <br>
+
+    <header id="f2">Replace black background.</header>
+    <p>Please upload an image with black background first, then another image for replacing that black background.</p>
+    <canvas id="fgcan"></canvas>
+    <canvas id="bgcan"></canvas>
+    <div id="dlbt"></div>
+    <p class="tl">Upload your image</p>
+    <p>Foreground:
+        <input type="file" multiple="false" accept="image/*" id="fg" onchange="loadfg()">
+    </p>
+    <p>Background:
+        <input type="file" multiple="false" accept="image/*" id="bg" onchange="loadbg()">
+    </p>
+    <p class="tl">Create composite</p>
+    <input type="button" value="Create composite" onclick="createCmp()">
+    <p class="tl">Reset image</p>
+    <input type="button" value="Clear Canvas" onclick="clearCvs()">
+    <!-- <button><a href="#" id="btn-download" download="myimage.jpg" onclick="downloadImg(this)">Download Your image</a></button> -->
+
+    <script src="upload_img.js"></script>
+    <script src="https://www.dukelearntoprogram.com//course1/common/js/image/SimpleImage.js"></script>    
+</body>
+</html>

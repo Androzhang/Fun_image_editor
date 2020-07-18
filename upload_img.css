@@ -1,0 +1,31 @@
+body {
+    background-color: blanchedalmond;
+    /* background-image: url("61LCky1zOnL._AC_.jpg"); */
+    /* background-repeat: no-repeat; */
+    background-size: auto;
+}
+
+#f1 {
+    font-size: 20pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#f2 {
+    font-size: 20pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+canvas {
+    height: 200px;
+    border: 1px solid lightgray;
+}
+
+input {
+    font-size: 14px;
+}
+
+.tl {
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
